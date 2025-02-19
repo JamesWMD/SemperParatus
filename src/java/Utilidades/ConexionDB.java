@@ -8,7 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConexionDB {
-    private static final String URL = "jdbc:mysql://databaseaws.cjis684qsvrb.sa-east-1.rds.amazonaws.com:3308/colibri";
+    private static final String URL = "jdbc:mysql://databaseaws.cjis684qsvrb.sa-east-1.rds.amazonaws.com:3308/colibri?useUnicode=true&characterEncoding=UTF-8";
     private static final String USER = "admin"; // Cambia por tu usuario de la BD
     private static final String PASSWORD = "**ADSO**2758277**"; // Cambia por tu contraseña de la BD
 

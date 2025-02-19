@@ -135,12 +135,12 @@
         <!-- Submenu del modulos Produccion -->
         <div class="main-menu__container" id="menu-container-produccion">
             <div class="main-menu__item" id="menu-item--traslado-ajustes">
-                <a href="gestionProductos.jsp" class="main-menu__link">
+                <a href="productosLista.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--traslados-ajustes">Traslados y Ajustes</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item--productos-insumos">
-                <a href="gestionProductos.jsp" class="main-menu__link">
+                <a href="productos.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--productos">Productos</button>
                 </a>
             </div>
@@ -583,7 +583,6 @@
     <script src="JS/scripts.js"></script>
     <script src="JS/usuarios.js"></script>
     <script src="JS/factVentas.js"></script> 
-    <script src="JS/gProductos.js"></script>
     
 </body>
 </html>

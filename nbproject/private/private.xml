@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/Usuarios.jsp</file>
-            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/src/java/Controladores/UsuariosServlet.java</file>
-            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/panelPrincipal.jsp</file>
-            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/CSS/panelPrincipalUsuario.css</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/CSS/productos.css</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/productosLista.jsp</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/src/java/Controladores/ProductosServlet.java</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/src/java/DAO/ProductosDAO.java</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/UsuarioLista.jsp</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/Components/mensaje.jsp</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/productos.jsp</file>
             <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/CSS/usuario.css</file>
         </group>
     </open-files>

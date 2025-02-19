@@ -9,9 +9,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/panelPrincipal.css">
-    <link rel="stylesheet" href="CSS/panelPrincipalUsuario.css">
+    <link rel="stylesheet" href="CSS/panelPrincipalProducto.css">
     <link rel="stylesheet" href="CSS/f_ventas.css">
-    <link rel="stylesheet" href="CSS/usuario.css">
+    <link rel="stylesheet" href="CSS/productos.css">
     
     <title>Panel Pricipal</title>
 </head>
@@ -112,7 +112,7 @@
         </div>
 
         <!-- Submenu del modulos Produccion -->
-        <div class="main-menu__container" id="menu-container-produccion">
+        <div class="main-menu__container main-menu__container_produccion" id="menu-container-produccion">
             <div class="main-menu__item" id="menu-item--traslado-ajustes">
                 <a href="gestionProductos.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--traslados-ajustes">Traslados y Ajustes</button>
@@ -153,140 +153,118 @@
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item-usuario">
-                <a href="gestionUsuario.jsp" class="main-menu__link">
+                <a href="Usuarios.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--usuarios">Usuarios</button>
                 </a>
             </div>
         </div>
 
-        
+       <!-- FORMULARIO DE GESTION DE PRODUCTOS -->
 
-        <!-- FORMULARIO DE USUARIO -->
-
-        <form class="form form__usuario" action="UsuariosServlet" method="POST">
-            
+        <form class="form__gestion-productos" action="ProductosServlet" method="post">
             <div class="tittle">
-                <img src="IMG/acceso.png" alt="" srcset="">
-                <h2 class="form_tittle">GESTION DE USUARIO</h2>
+                <img src="IMG/ajustra_producto.png" alt="" srcset="">
+                <H2 class="form_tittle" >GESTION DE PRODUCTOS</H2>
             </div>
-            <h3 class="tittle" >Nuevo Usuario</h3>
-            <%-- Mostrar mensaje de error si existe --%>
-            <c:if test="${not empty mensaje}">
-                <h4 class="mensaje form_mensaje form_mensaje-usuario">${mensaje}</h4>
-            </c:if>
-            <fieldset class="form__actions form__actions--botones-usuario">
-                <legend class="form__legend">Acciones de Usuario</legend>
-                
-                <!-- Acción Buscar -->
-                <div class="button-container">
-                    <p class="form__text" for="">Buscar Usuario</p>
-                    <button type="submit" name="action" class="form__button" value="buscar">
-                        <img src="IMG/buscarUsuarios.png" alt="Buscar Usuario">
-                    </button>
-                </div>
-                
-                <!-- Acción Listar-->
-                <div class="button-container">
-                    <p class="form__text" for="">Listar Usuarios</p>
-                    <button type="summit" name="action" class="form__button" value="listar">
-                        <img src="IMG/ListarPersona.png" alt="Lista Usuarios">
-                    </button>
-                </div>
-                
-                <!-- Acción Limpiar -->
-                <div class="button-container">
-                    <p class="form__text" for="">Limpiar Formulario</p>
-                    <button type="reset" class="form__button">
-                        <img src="IMG/limpieza-de-datos.png" alt="Limpiar formulario">
-                    </button>
-                </div>
-                
-                <!-- Acción Modificar -->
-                <div class="button-container">
-                    <p class="form__text" for="">Modificar Usuario</p>
-                    <button type="submit" class="form__button" name="action" value="modificar">
-                        <img src="IMG/modificar_usuario.png" alt="Modificar usuario">
-                    </button>
-                </div>
-                
-                <!-- Acción Guardar -->
-                <div class="button-container">
-                    <p class="form__text form__test-guardar" for="">Crear Usuario</p>
-                    <button type="submit" class="form__button" name="action" value="guardar">
-                        <img src="IMG/crear_usuario.png" alt="Crear Usuario">
-                    </button>
-                </div>
-                
-                <!-- Acción Eliminar -->
-                <div class="button-container">
-                    <p class="form__text" for="">Eliminar Usuario</p>
-                    <button type="submit" class="form__button" name="action" value="eliminar">
-                        <img src="IMG/eliminar_usuario.png" alt="Eliminar Usuario">
-                    </button>
-                </div>
-                <div class="button-container">
-                    <p class="form__text" for="">Cerrar Formulario</p>
-                    <button type="summit" class="form__button form__button-cerrar" name="action" value="cerrar">
-                        <img src="IMG/cerrar.png" alt="Guardar datos">
-                    </button>
-                </div>
-            </fieldset>
-            <Section class="container__fields-table">
-
-                <fieldset class="form__field-usuarios">
-                    <legend class="form__legend">informacion de Usuario</legend>
+            
+        
+            <section>
+                <fieldset class="form__actions form__actions--botones-gestionProductos">
+                    <legend class="form__legend">Acciones del formulario</legend>
                     
-                    <div class="form__field-usuario form__field--usuario-idUsuario">
-                        <label for="noIdentificacion" class="form__label">Usuario</label>
-                        <input type="text" name="noIdentificacion" id="noIdentificacion" class="form__input form__input--idUsuario" value="${usuario.noIdentificacion}">
-                    </div>
-                    
-                    <div class="form__field-usuario form__field--usuario-nombreUsuario">
-                        <label for="nombreUsuario" class="form__label">Nombres Usuario</label>
-                        <input type="text" name="nombreUsuario" id="nombreUsuario" class="form__input form__input--nombreUsuario" value="${usuario.nombreUsuario}">
-                    </div>
-                    
-                    <div class="container__password">
-                        
-                        <div class="container__password-form__field">
-                            
-                            <div class="form__field-usuario form__field--usuario-password">
-                                <label for="password" class="form__label">Contraseña</label>
-                                <div class="form__input-container">
-                                    <input type="password" name="password" id="password" class="form__input form__input--password" oninput="validatePasswords()" value="${usuario.password}">
-                                </div>
-                            </div>
-                                
-                            <div class="form__field-usuario form__field--usuario-repet_password">
-                                <label for="repet_password" class="form__label">Repetir Contraseña</label>
-                                <div class="form__input-container">
-                                    <input type="password" name="repet_password" id="repet_password" class="form__input form__input--repet_password" oninput="validatePasswords()" value="${usuario.password}">
-                                </div>
-                            </div>
-                         </div>
-                         <p class="form__error-message"></p>   
-                    </div>
-                    <div class="containerBtnVer">
-                        <label for="">Ver</label>
-                        <button type="button" class="botonVer"  onclick="togglePassword(event)">
-                            <img src="IMG/ojo-cerrado (1).png" alt="Ver contraseña" class="form__icon">
+                    <!-- Acción Buscar -->
+                    <div class="button-container">
+                        <p class="form__text" for="">Buscar Producto</p>
+                        <button type="summit" name="action" class="form__button" value="buscar">
+                            <img src="IMG/caja-de-entrega.png" alt="Buscar Producto">
                         </button>
                     </div>
-                    <div class="form__field-usuario form__field--usuario-estado">
-                        <label for="estado" class="form__label">Estado</label>
+                    
+                    <!-- Acción Listar-->
+                    <div class="button-container">
+                        <p class="form__text" for="">Listar Productos</p>
+                        <button type="summit" name="action" class="form__button" value="listar">
+                            <img src="IMG/listarProductos.png" alt="Listar Productos">
+                        </button>
+                    </div>
+                    <div class="button-container">
+                        <p class="form__text" for="">Limpiar</p>
+                        <button type="summit" name="action" class="form__button" value="limpiar">
+                            <img src="IMG/limpieza-de-datos.png" alt="Guardar datos">
+                        </button>
+                    </div>
+                    <div class="button-container">
+                        <p class="form__text" for="">Modificar</p>
+                        <button type="summit" name="action" class="form__button" value="modificar">
+                            <img src="IMG/modificarProducto.png" alt="Modificar productos">
+                        </button>
+                    </div>
+                    <div class="button-container">
+                        <p class="form__text" for="">Guardar</p>
+                        <button type="summit" name="action" class="form__button" value="guardar">
+                            <img src="IMG/agregar-producto.png" alt="Guardar Producto">
+                        </button>
+                    </div>
+                    <div class="button-container">
+                        <p class="form__text" for="">Eliminar</p>
+                        <button type="summit" name="action" class="form__button" value="eliminar">
+                            <img src="IMG/eliminar-producto.png" alt="Guardar datos">
+                        </button>
+                    </div>
+                    <div class="button-container">
+                        <p class="form__text" for="">Cerrar Formulario</p>
+                        <button type="summit" name="action" class="form__button form__button-cerrar" value="cerrar">
+                            <img src="IMG/cerrar.png" alt="cerrar fomulario">
+                        </button>
+                    </div>
+                </fieldset>
+            </section>
+            <jsp:include page="Components/mensaje.jsp"/>
+            
+            <fieldset class="form__fields form__fields--gestion-productos_DatosProductos">
+                <legend class="form__legend">Datos del producto</legend>
+                <div class="form__field--container_gestion-productos_DatosProductos">
+                    <div class="form__field--producto form__field--producto-codigo">
+                        <label for="codigoProducto" class="form__label">Cod</label>
+                        <input type="text" name="codigoProducto" id="codigoProducto" class="form__input--producto form__input--codigo" value="${producto.codigoProducto}">
+                    </div>
+                    <div class="form__field--producto form__field--producto-nombreProducto">
+                        <label for="nombreProducto" class="form__label">Nombre del Producto</label>
+                        <input type="text" name="nombreProducto" id="nombreProducto" class="form__input--producto form__input--nombreProducto" value="${producto.nombreProducto}">
+                    </div>
+                    <div class="form__field--producto form__field--producto-categoria">
+                        <label for="categoria" class="form__label">Categoria</label>
+                        <input type="text" name="categoria" id="categoria" class="form__input--producto form__input--categoria" value="${producto.categoria}">
+                    </div>
+                    <div class="form__field--producto form__field--producto-precio">
+                        <label for="precio" class="form__label">Precio</label>
+                        <input type="text" name="precio" id="precio" class="form__input--producto formatear form__input--precio" value="${producto.precio}">
+                    </div>
+                    <div class="form__field--producto form__field--producto-descuento">
+                        <label for="stock" class="form__label">Stock</label>
+                        <input type="text" name="stock" id="stock" class="form__input--producto formatear  form__input--descuento" value="${producto.stock}">
+                    </div>
+                    <div class="form__field--producto form__field--producto-subtotal">
+                        <label for="subtotal" class="form__label">Estado</label>
                         <select name="estado" id="estado" class="form__input">
-                            <option value="Activo" ${usuario.estado == 'Activo' ? 'selected' : ''}>Activo</option>
-                            <option value="Inactivo" ${usuario.estado == 'Inactivo' ? 'selected' : ''}>Inactivo</option>
+                            <option value="Activo" ${producto.estado == 'Activo' ? 'selected' : ''}>Activo</option>
+                            <option value="Inactivo" ${producto.estado == 'Inactivo' ? 'selected' : ''}>Inactivo</option>
                         </select>  
                     </div>
-                    
-                </fieldset>
-            </Section>
-                        
-            <!-- Campo oculto para la acción -->
-            <input type="hidden" name="action" value="buscar" id="actionField">
-            <input type="hidden" name="noIdentificacion" value="${usuario.noIdentificacion}">
+                </div>
+                <div class="form__fields--gestion-productos_datosProductos-descripcion">
+                    <label for="descripcion">Descripcion del producto</label>
+                    <textarea name="descripcion" id="descripcion">${producto.descripcion}</textarea>
+                </div>
+                
+            </fieldset>
+            <c:if test="${not empty mensaje}">
+                <h4 class="mensaje form_mensaje form_mensaje-producto">${mensaje}</h4>
+            </c:if>
             
+           <!-- Campo oculto para la acción -->
+            <input type="hidden" name="action" value="buscar" id="actionField">
+            <input type="hidden" name="codigoProducto" value="${producto.codigoProducto}">
         </form>
 
     </main>

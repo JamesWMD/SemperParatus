@@ -12,6 +12,10 @@ public class Productos {
     private int stock;
     private String estado;
     private String descripcion;
+    
+    // Nuevo atributo para el precio formateado
+    private String precioFormateado;
+
 
     public Productos() {
     }
@@ -80,6 +84,14 @@ public class Productos {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getPrecioFormateado() {
+        return precioFormateado;
+    }
+
+    public void setPrecioFormateado(String precioFormateado) {
+        this.precioFormateado = precioFormateado;
     }
     
 }
