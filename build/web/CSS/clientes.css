@@ -1,0 +1,147 @@
+.form__gestion-productos {
+    background-color: #f8efe4;
+    max-width: 1000px;
+    max-height: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.tittle {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.form_mensaje {
+    text-align: center;
+}
+
+.form__fields--gestion-productos_DatosProductos {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px ;
+}
+
+.form__field--container_gestion-productos_DatosProductos {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form__field--subcontainer_gestion-productos_DatosProductos {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px
+}
+.form__fields--gestion-productos_datosProductos-descripcion {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.form__fields--gestion-productos_datosProductos-descripcion label {
+    font-weight: bold;
+}
+
+.form__fields--gestion-productos_datosProductos-descripcion textarea {
+    height: 100px;
+    font-size: 15px;
+    font-family: 'Leelawadee';
+}
+
+.form__actions--botones-gestionClientes {
+    width: 50%;
+}
+
+.container__fields-table {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tabla-contenedora-productos {
+    max-height: 350px; /* Define la altura máxima para la tabla */
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    
+}
+
+.titulo__tabla{
+    text-align: center;
+}
+
+.tabla-productos {
+    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+    border-collapse: collapse; /* Elimina los espacios entre las celdas */
+    margin: auto;
+}
+
+.tabla-productos th, 
+.tabla-productos td {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 2px 5px;
+    height: 25px;
+    font-size: 12px;
+}
+.tabla-productos td {
+    background-color: #fff;
+}
+
+.tabla-productos thead th {
+    position: sticky; /* Hace que los encabezados sean "pegajosos" */
+    top: 0; /* Mantiene los encabezados en la parte superior durante el scroll */
+    background-color: #f7ed9b; /* Color de fondo para el encabezado */
+    z-index: 1; /* Asegura que los encabezados estén por encima de las filas */
+    
+}
+
+.tabla-usuario-nombreUsuario {
+    max-width: 300px;
+}
+
+.tabla__button{
+    background: none; /* Sin fondo */
+    border: none; /* Sin bordes */
+    padding: 0; /* Sin relleno */
+    margin: 0; /* Sin márgenes */
+    cursor: pointer; /* Cambiar a cursor de enlace */
+    display: inline-block; /* Asegura que respete el tamaño de la imagen */
+}
+.icon_button-tabla{
+    width: 15px;
+}
+
+.tabla-usuario-selecionar, 
+.tabla-usuario-eliminar, 
+.tabla-usuario-estado{
+    width: 60px;
+}
+
+.tabla-usuario-noIdentificacion{
+    width: 120px;
+}
+
+.container__tabla-listaProductos{
+    background-color: #f8efe4;
+    max-width: 1000px;
+    max-height: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.container__tabla-listaProductos{
+    background-color: #ooo;
+}
+

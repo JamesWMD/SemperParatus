@@ -1,7 +1,7 @@
 package Modelos;
 
 public class Clientes {
-    private String noDocumento;
+    private String idCliente;  // Si 'noDocumento' es la clave, usa este nombre para mayor claridad
     private String tipoDocumento;
     private String nombreCliente;
     private String apellidoCliente;
@@ -11,8 +11,8 @@ public class Clientes {
     public Clientes() {
     }
 
-    public Clientes(String noDocumento, String tipoDocumento, String nombreCliente, String apellidoCliente, String telefonoCliente, String direccionCliente) {
-        this.noDocumento = noDocumento;
+    public Clientes(String idCliente, String tipoDocumento, String nombreCliente, String apellidoCliente, String telefonoCliente, String direccionCliente) {
+        this.idCliente = idCliente;
         this.tipoDocumento = tipoDocumento;
         this.nombreCliente = nombreCliente;
         this.apellidoCliente = apellidoCliente;
@@ -20,12 +20,15 @@ public class Clientes {
         this.direccionCliente = direccionCliente;
     }
 
-    public String getNoDocumento() {
-        return noDocumento;
+    public String getIdCliente() {
+        return idCliente;
     }
 
-    public void setNoDocumento(String noDocumento) {
-        this.noDocumento = noDocumento;
+    public void setIdCliente(String idCliente) {
+        /*if (idCliente == null || idCliente.trim().isEmpty()) {
+            throw new IllegalArgumentException("El ID del cliente no puede estar vacío");
+        }*/
+        this.idCliente = idCliente;
     }
 
     public String getTipoDocumento() {
@@ -33,6 +36,9 @@ public class Clientes {
     }
 
     public void setTipoDocumento(String tipoDocumento) {
+        /*if (tipoDocumento == null || tipoDocumento.trim().isEmpty()) {
+            throw new IllegalArgumentException("El tipo de documento no puede estar vacío");
+        }*/
         this.tipoDocumento = tipoDocumento;
     }
 
@@ -41,6 +47,9 @@ public class Clientes {
     }
 
     public void setNombreCliente(String nombreCliente) {
+        /*if (nombreCliente == null || nombreCliente.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre del cliente no puede estar vacío");
+        }*/
         this.nombreCliente = nombreCliente;
     }
 
@@ -49,6 +58,9 @@ public class Clientes {
     }
 
     public void setApellidoCliente(String apellidoCliente) {
+        /*if (apellidoCliente == null || apellidoCliente.trim().isEmpty()) {
+            throw new IllegalArgumentException("El apellido del cliente no puede estar vacío");
+        }*/
         this.apellidoCliente = apellidoCliente;
     }
 
@@ -57,6 +69,9 @@ public class Clientes {
     }
 
     public void setTelefonoCliente(String telefonoCliente) {
+        /*if (telefonoCliente == null || telefonoCliente.trim().isEmpty()) {
+            throw new IllegalArgumentException("El teléfono del cliente no puede estar vacío");
+        }*/
         this.telefonoCliente = telefonoCliente;
     }
 
@@ -65,7 +80,9 @@ public class Clientes {
     }
 
     public void setDireccionCliente(String direccionCliente) {
+        /*if (direccionCliente == null || direccionCliente.trim().isEmpty()) {
+            throw new IllegalArgumentException("La dirección del cliente no puede estar vacía");
+        }*/
         this.direccionCliente = direccionCliente;
     }
-    
 }

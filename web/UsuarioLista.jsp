@@ -77,11 +77,68 @@
 
     <main class="main-menu">
 
-        <!-- Submenu del modulos Soporte y Registro -->
-        <div class="main-menu__container" id="menu-container-soporte-registro">
-            <div class="main-menu__item"id="menu-item-clientes">
+             <!-- Submenu del modulos Comercial -->
+        <div class="main-menu__container" id="menu-container-comercial">
+            <div class="main-menu__item" id="menu-item-factura-venta">
                 <a href="#" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--clientes" disabled>Clientes</button>
+                    <button class="main-menu__button main-menu__button--factura-venta">Factura de Venta</button>
+                </a>
+            </div>
+            <div class="main-menu__item" id="menu-item-factura-compra">
+                <a href="#" class="main-menu__link">
+                    <button class="main-menu__button main-menu__button--factura-compra" disabled>Factura de Compra</button>
+                </a>
+            </div>
+            <div class="main-menu__item" id="menu-item-cotizacion">
+                <a href="#" class="main-menu__link">
+                    <button class="main-menu__button main-menu__button--cotizacion" disabled>Cotización</button>
+                </a>
+            </div>
+            <div class="main-menu__item" id="menu-item-pedido">
+                <a href="#" class="main-menu__link">
+                    <button class="main-menu__button main-menu__button--pedido" disabled>Pedido</button>
+                </a>
+            </div>
+            <div class="main-menu__item" id="menu-item-recibo-caja">
+                <a href="#" class="main-menu__link">
+                    <button class="main-menu__button main-menu__button--recibo-caja" disabled>Recibo de Caja</button>
+                </a>
+            </div>
+            <div class="main-menu__item" id="menu-item-egreso">
+                <a href="#" class="main-menu__link">
+                    <button class="main-menu__button main-menu__button--egreso" disabled>Egreso</button>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Submenu del modulos Administrativo -->
+        <div class="main-menu__container" id="menu-container-administrativo">
+            <div class="main-menu__item" id="menu-item-informe">
+                <a href="#" class="main-menu__link">
+                    <button class="main-menu__button main-menu__button--factura-venta" disabled>Informe</button>
+                </a>
+            </div>
+        </div>
+
+        <!-- Submenu del modulos Produccion -->
+        <div class="main-menu__container" id="menu-container-produccion">
+            <div class="main-menu__item" id="menu-item--traslado-ajustes">
+                <a href="#" class="main-menu__link">
+                    <button class="main-menu__button main-menu__button--traslados-ajustes" disabled>Traslados y Ajustes</button>
+                </a>
+            </div>
+            <div class="main-menu__item" id="menu-item--productos-insumos">
+                <a href="productos.jsp" class="">
+                    <button class="main-menu__button main-menu__button--productos">Productos</button>
+                </a>
+            </div>
+        </div>
+
+       <!-- Submenu del modulos Soporte y Registro -->
+        <div class="main-menu__container main-menu__container_soporte-registro" id="menu-container-soporte-registro">
+            <div class="main-menu__item"id="menu-item-clientes">
+                <a href="clientes.jsp" class="main-menu__link">
+                    <button class="main-menu__button main-menu__button--clientes">Clientes</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item-proveedores">
@@ -105,12 +162,13 @@
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item-usuario">
-                <a href="#" class="main-menu__link">
+                <a href="Usuarios.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--usuarios">Usuarios</button>
                 </a>
             </div>
         </div>
-        
+       
+        <!-- TABLA DE CLIENTES -->
         <div class="container__tabla-listaUsuarios">
             <h3 class="titulo__tabla titulo__tabla-usuarios">LISTA DE USUARIOS</h3>
             

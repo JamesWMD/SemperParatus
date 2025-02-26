@@ -68,7 +68,7 @@
     </nav>
 
     <main class="main-menu">
-        <!-- Submenu del modulos Comercial -->
+             <!-- Submenu del modulos Comercial -->
         <div class="main-menu__container" id="menu-container-comercial">
             <div class="main-menu__item" id="menu-item-factura-venta">
                 <a href="#" class="main-menu__link">
@@ -77,27 +77,27 @@
             </div>
             <div class="main-menu__item" id="menu-item-factura-compra">
                 <a href="#" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--factura-compra">Factura de Compra</button>
+                    <button class="main-menu__button main-menu__button--factura-compra" disabled>Factura de Compra</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item-cotizacion">
                 <a href="#" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--cotizacion">Cotización</button>
+                    <button class="main-menu__button main-menu__button--cotizacion" disabled>Cotización</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item-pedido">
                 <a href="#" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--pedido">Pedido</button>
+                    <button class="main-menu__button main-menu__button--pedido" disabled>Pedido</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item-recibo-caja">
                 <a href="#" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--recibo-caja">Recibo de Caja</button>
+                    <button class="main-menu__button main-menu__button--recibo-caja" disabled>Recibo de Caja</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item-egreso">
                 <a href="#" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--egreso">Egreso</button>
+                    <button class="main-menu__button main-menu__button--egreso" disabled>Egreso</button>
                 </a>
             </div>
         </div>
@@ -106,7 +106,7 @@
         <div class="main-menu__container" id="menu-container-administrativo">
             <div class="main-menu__item" id="menu-item-informe">
                 <a href="#" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--factura-venta">Informe</button>
+                    <button class="main-menu__button main-menu__button--factura-venta" disabled>Informe</button>
                 </a>
             </div>
         </div>
@@ -114,12 +114,12 @@
         <!-- Submenu del modulos Produccion -->
         <div class="main-menu__container" id="menu-container-produccion">
             <div class="main-menu__item" id="menu-item--traslado-ajustes">
-                <a href="gestionProductos.jsp" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--traslados-ajustes">Traslados y Ajustes</button>
+                <a href="#" class="main-menu__link">
+                    <button class="main-menu__button main-menu__button--traslados-ajustes" disabled>Traslados y Ajustes</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item--productos-insumos">
-                <a href="gestionProductos.jsp" class="main-menu__link">
+                <a href="productos.jsp" class="">
                     <button class="main-menu__button main-menu__button--productos">Productos</button>
                 </a>
             </div>
@@ -128,32 +128,32 @@
        <!-- Submenu del modulos Soporte y Registro -->
         <div class="main-menu__container main-menu__container_soporte-registro" id="menu-container-soporte-registro">
             <div class="main-menu__item"id="menu-item-clientes">
-                <a href="#" class="main-menu__link">
+                <a href="clientes.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--clientes">Clientes</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item-proveedores">
                 <a href="#" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--proveedores">Proveedores</button>
+                    <button class="main-menu__button main-menu__button--proveedores" disabled>Proveedores</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item-empleados">
                 <a href="#" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--empleados">Empleados</button>
+                    <button class="main-menu__button main-menu__button--empleados" disabled>Empleados</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item--puntos-ventas">
                 <a href="#" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--puntos-ventas">Puntos de ventas</button>
+                    <button class="main-menu__button main-menu__button--puntos-ventas" disabled>Puntos de ventas</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item--formas-pago">
                 <a href="#" class="main-menu__link">
-                    <button class="main-menu__button main-menu__button--formas-pago">Formas de Pago</button>
+                    <button class="main-menu__button main-menu__button--formas-pago" disabled>Formas de Pago</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item-usuario">
-                <a href="gestionUsuario.jsp" class="main-menu__link">
+                <a href="Usuarios.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--usuarios">Usuarios</button>
                 </a>
             </div>
@@ -224,6 +224,8 @@
                         <img src="IMG/eliminar_usuario.png" alt="Eliminar Usuario">
                     </button>
                 </div>
+                
+                <!-- Acción Cerrar Formulario -->
                 <div class="button-container">
                     <p class="form__text" for="">Cerrar Formulario</p>
                     <button type="summit" class="form__button form__button-cerrar" name="action" value="cerrar">
@@ -306,7 +308,6 @@
     <script src="JS/scripts.js"></script>
     <script src="JS/usuarios.js"></script>
     <script src="JS/factVentas.js"></script> 
-    <script src="JS/gProductos.js"></script>
     
 </body>
 </html>
