@@ -58,6 +58,9 @@ String action = request.getParameter("action");
             case "limpiar":
                 limpiarFormulario(request, response);
                 break;
+            case "filtrar":
+                filtrar(request, response);
+                break;
             
             default:
                 throw new AssertionError();
@@ -133,8 +136,8 @@ String action = request.getParameter("action");
             || estado == null || estado.trim().isEmpty()
             || descripcion == null || descripcion.trim().isEmpty()) {
 
-        request.setAttribute("error", "Todos los campos son obligatorios");
-        request.getRequestDispatcher(pagListar).forward(request, response);
+        request.setAttribute("mensaje", "Todos los campos son obligatorios");
+        request.getRequestDispatcher(formProductos).forward(request, response);
         return; // Detener ejecución
     }
 
@@ -147,8 +150,8 @@ String action = request.getParameter("action");
             throw new NumberFormatException(); // Asegurar que el precio sea positivo
         }
     } catch (NumberFormatException e) {
-        request.setAttribute("error", "El precio debe ser un número válido y mayor a 0.");
-        request.getRequestDispatcher(pagListar).forward(request, response);
+        request.setAttribute("mensaje", "El precio debe ser un número válido y mayor a 0.");
+        request.getRequestDispatcher(formProductos).forward(request, response);
         return;
     }
 
@@ -178,14 +181,18 @@ String action = request.getParameter("action");
     // Guardar producto
     int result = prodDao.registrarProducto(obj);
 
-    if (result > 0) {
-        request.setAttribute("success", "PRODUCTO REGISTRADO CORRECTAMENTE");
+    if (result == -1) {
+        request.setAttribute("mensaje", "ERROR: EL PRODUCTO YA EXISTE");
+    } else if (result > 0) {
+        request.setAttribute("mensaje", "PRODUCTO REGISTRADO CORRECTAMENTE");
+        request.getRequestDispatcher(formProductos).forward(request, response);
     } else {
-        request.setAttribute("error", "ERROR: PRODUCTO NO REGISTRADO");
-        request.setAttribute("productos", obj); // Devolver datos en caso de error
+        request.setAttribute("mensaje", "ERROR: PRODUCTO NO REGISTRADO");
+        request.setAttribute("cliente", obj); // Devolver datos en caso de error
+        request.getRequestDispatcher(formProductos).forward(request, response);
     }
-    request.setAttribute("productos", prodDao.ListarTodosProductos());
-    request.getRequestDispatcher(pagListar).forward(request, response);
+    //request.setAttribute("productos", prodDao.ListarTodosProductos());
+    request.getRequestDispatcher(formProductos).forward(request, response);
 }
 
     
@@ -213,7 +220,7 @@ String action = request.getParameter("action");
         String codigoProducto = request.getParameter("codigoProducto");
 
         if (codigoProducto == null || codigoProducto.trim().isEmpty()) {
-            request.setAttribute("mensaje", "Debe ingresar el codigo del producto.");
+            request.setAttribute("mensaje", "DEBE INGRESAR EL CODIGO DEL PRODUCTO.");
             request.getRequestDispatcher(formProductos).forward(request, response);
             return;
         }
@@ -222,9 +229,9 @@ String action = request.getParameter("action");
 
         if (producto != null) {
             request.setAttribute("producto", producto);
-            request.setAttribute("mensaje", "Producto encontrado.");
+            request.setAttribute("mensaje", "PRODUCTO ENCONTRADO.");
         } else {
-            request.setAttribute("mensaje", "Producto no encontrado.");
+            request.setAttribute("mensaje", "PRODUCTO NO ENCONTRADO.");
         }
 
         request.getRequestDispatcher(formProductos).forward(request, response);
@@ -291,13 +298,13 @@ String action = request.getParameter("action");
         int result = prodDao.editarProducto(obj);
 
         if (result > 0) {
-            request.getSession().setAttribute("success", "El producto con el código " +"'" + codigoProducto + "'" +" fue modificado exitosamente.");
+            request.getSession().setAttribute("mensaje", "El producto con el código " +"'" + codigoProducto + "'" +" fue modificado exitosamente.");
         } else {
-            request.getSession().setAttribute("error", "El producto con el codigo " + "'" + codigoProducto + "'" + " NO EXISTE");
+            request.getSession().setAttribute("mensaje", "El producto con el codigo " + "'" + codigoProducto + "'" + " NO EXISTE");
             request.setAttribute("producto", obj); // Devolver datos en caso de error
         }
-        request.setAttribute("productos", prodDao.ListarTodosProductos());
-        request.getRequestDispatcher(pagListar).forward(request, response);
+        //request.setAttribute("productos", prodDao.ListarTodosProductos());
+        request.getRequestDispatcher(formProductos).forward(request, response);
     }
 
     
@@ -332,6 +339,23 @@ String action = request.getParameter("action");
         request.getRequestDispatcher(pagListar).forward(request, response);
         
     }
+    
+    /* ============================= FILTRAR PRODUCTOS ==========================*/
+    private void filtrar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // Obtener valores de los filtros
+        String nombre = request.getParameter("nombreProducto");
+        String categoria = request.getParameter("categoria");
+        String estado = request.getParameter("estado");
+
+        // Llamar al método de filtrado en el DAO
+        request.setAttribute("productos", prodDao.filtrarProductos(nombre, categoria, estado));
+
+        // Redirigir a la página de lista de productos
+        request.getRequestDispatcher(pagListar).forward(request, response);
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

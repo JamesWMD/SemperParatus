@@ -16,6 +16,14 @@ public class Productos {
     // Nuevo atributo para el precio formateado
     private String precioFormateado;
 
+    public Productos(String codigoProducto, String nombreProducto, String categoria, BigDecimal precio) {
+        this.codigoProducto = codigoProducto;
+        this.nombreProducto = nombreProducto;
+        this.categoria = categoria;
+        this.precio = precio;
+    }
+
+    
 
     public Productos() {
     }

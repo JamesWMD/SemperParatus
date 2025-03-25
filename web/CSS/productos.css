@@ -1,5 +1,5 @@
 .form__gestion-productos {
-    background-color: #f8efe4;
+    background-color: #FFFfeA;
     max-width: 1000px;
     max-height: 700px;
     display: flex;
@@ -128,7 +128,7 @@
 }
 
 .container__tabla-listaProductos{
-    background-color: #f8efe4;
+    background-color: #FFFfeA;
     max-width: 1000px;
     max-height: 700px;
     display: flex;

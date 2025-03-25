@@ -1,3 +1,7 @@
+// Formato de número
+/*function formatNumber(num) {
+    return num.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}*/
 document.addEventListener('DOMContentLoaded', () => {
     // Obtener todos los botones de navegación y sus contenedores asociados
     const navigationButtons = document.querySelectorAll('.navigation__button');
@@ -56,8 +60,39 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', handleMainMenuClick);
     });
 });
-
 //--FORMATO DE SEPARACION DE MILES--
+//const inputs = document.querySelectorAll('.formatear');
+//
+//inputs.forEach(input => {
+//    input.addEventListener('input', () => {
+//        // Eliminar caracteres no numéricos excepto la coma (para decimales)
+//        let valor = input.value.replace(/[^0-9,]/g, '');
+//
+//        // Asegurarse de que solo hay una coma decimal
+//        let partes = valor.split(',');
+//        if (partes.length > 2) {
+//            valor = partes[0] + ',' + partes.slice(1).join('');
+//        }
+//
+//        // Separar la parte entera y la decimal
+//        let [entero, decimal] = valor.split('');
+//
+//        // Formatear la parte entera con separadores de miles (puntos)
+//        if (entero) {
+//            entero = entero.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+//        }
+//
+//        // Limitar los decimales a dos dígitos
+//        if (decimal) {
+//            decimal = decimal.substring(0, 2);
+//        }
+//
+//        // Reconstruir el valor formateado
+//        input.value = decimal !== undefined ? `${entero},${decimal}` : entero;
+//    });
+//});
+
+////--FORMATO DE SEPARACION DE MILES--
 const inputs = document.querySelectorAll('.formatear');
 
 inputs.forEach(input => {
@@ -96,11 +131,11 @@ document.getElementById('agregarProducto').addEventListener('click', function (e
     event.preventDefault();
 
     // Obtener valores del formulario
-    const codigo = document.getElementById('fCodigo').value.trim();
-    const nombreProducto = document.getElementById('fNombreProducto').value.trim();
-    const categoria = document.getElementById('fCategoria').value.trim();
+    const codigo = document.getElementById('codigoProducto').value.trim();
+    const nombreProducto = document.getElementById('nombreProducto').value.trim();
+    const categoria = document.getElementById('categoria').value.trim();
     const cantidad = parseFloat(document.getElementById('cantidad').value.replace(/,/g, '')) || 0;
-    const precio = parseFloat(document.getElementById('fPrecio').value.replace(/,/g, '')) || 0;
+    const precio = parseFloat(document.getElementById('precio').value.replace(/,/g, '')) || 0;
     const descuento = parseFloat(document.getElementById('descuento').value.replace(/,/g, '')) || 0;
 
     // Calcular subtotal
@@ -161,11 +196,11 @@ function seleccionarProducto(fila) {
     const precio = parseFloat(fila.querySelector('.factura__tabla-productos-vunit').textContent.replace(/,/g, '')) || 0;
 
     // Pasar los valores seleccionados a los campos del formulario
-    document.getElementById('fCodigo').value = codigo;
-    document.getElementById('fNombreProducto').value = nombreProducto;
-    document.getElementById('fCategoria').value = categoria;
+    document.getElementById('codigoProducto').value = codigo;
+    document.getElementById('nombreProducto').value = nombreProducto;
+    document.getElementById('categoria').value = categoria;
     document.getElementById('cantidad').value = cantidad;
-    document.getElementById('fPrecio').value = precio;
+    document.getElementById('precio').value = precio;
 
     // Marcar la fila como seleccionada
     if (filaSeleccionada) filaSeleccionada.classList.remove('seleccionada'); // Quitar selección previa
@@ -191,7 +226,7 @@ document.getElementById('eliminarProducto').addEventListener('click', function (
 
 // Limpiar formulario
 function limpiarFormulario() {
-    document.getElementById('codigo').value = '';
+    document.getElementById('codigoProducto').value = '';
     document.getElementById('nombreProducto').value = '';
     document.getElementById('categoria').value = '';
     document.getElementById('cantidad').value = '';
@@ -234,19 +269,16 @@ function actualizarTotales() {
     document.querySelector('.tablaTotales tr.total td:nth-child(2)').textContent = `$${formatNumber(totalAPagar)}`;
 }
 
-// Formato de número
-function formatNumber(num) {
-    return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
+
 
 // FACTURA DE VENTAS (Calcular subtotal automáticamente al cambiar cantidad o precio)
 document.getElementById('cantidad').addEventListener('input', calcularSubtotal);
-document.getElementById('fPrecio').addEventListener('input', calcularSubtotal);
+document.getElementById('precio').addEventListener('input', calcularSubtotal);
 document.getElementById('descuento').addEventListener('input', calcularSubtotal);
 
 function calcularSubtotal() {
     const cantidad = parseFloat(document.getElementById('cantidad').value.replace(/,/g, '')) || 0;
-    const precio = parseFloat(document.getElementById('fPrecio').value.replace(/,/g, '')) || 0;
+    const precio = parseFloat(document.getElementById('precio').value.replace(/,/g, '')) || 0;
     const descuento = parseFloat(document.getElementById('descuento').value.replace(/,/g, '')) || 0;
 
     const subtotal = (cantidad * precio) - descuento;

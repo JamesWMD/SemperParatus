@@ -1,6 +1,7 @@
 package Controladores;
 
 import DAO.AccesoRegistroDAO;
+import DAO.UsuariosDAO;
 import Modelos.Usuarios;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,6 +25,7 @@ public class AccesoRegistroServlet extends HttpServlet {
      */
     private static final long serialVersionUID = 1L;
     private AccesoRegistroDAO accesoRegistroDAO;
+    private UsuariosDAO userDao;
 
     public void init() {
         accesoRegistroDAO = new AccesoRegistroDAO();
@@ -98,34 +100,46 @@ public class AccesoRegistroServlet extends HttpServlet {
 
         }
     }
-
     private void validarLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String usuario = request.getParameter("usuario");
         String password = request.getParameter("password");
 
         try {
-            // Intentamos validar al usuario con las credenciales proporcionadas
+            // Validar credenciales
             Usuarios user = accesoRegistroDAO.validar(usuario, password);
 
-            // Verificamos que el usuario existe y su estado es 'Activo'
-            if (user != null && "Activo".equals(user.getEstado())) {
+            // Verificar si los campos están vacíos
+            if (usuario.trim().isEmpty() || password.trim().isEmpty()) {
+                request.setAttribute("mensaje", "Ingrese Usuario y Contraseña");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+
+                // Verificar si el usuario existe y está activo
+            } else if (user != null && "Activo".equals(user.getEstado().trim())) {
                 HttpSession session = request.getSession();
-                session.setAttribute("usuario", user); // Guardamos el usuario en la sesión
-                response.sendRedirect("panelPrincipal.jsp"); // Redirigimos al panel principal
+                session.setAttribute("usuario", user);
+                response.sendRedirect("panelPrincipal.jsp");
+
+                // Verificar si el usuario está inactivo
+            } else if (user != null && "Inactivo".equals(user.getEstado())) {
+                request.setAttribute("mensaje", "Usuario Inactivo");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+                
+                // Si el usuario no existe o no cumple ninguna condición anterior
             } else {
-                // Si las credenciales son incorrectas o el estado no es 'Activo'
-                request.setAttribute("mensaje", "Usuario no autorizado"); // Seteamos el mensaje de error
-                request.getRequestDispatcher("index.jsp").forward(request, response); // Enviamos el request a la misma página
+                request.setAttribute("mensaje", "Usuario no autorizado");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
+
         } catch (Exception e) {
-            // Si ocurre algún error durante la validación (por ejemplo, un error de base de datos)
-            e.printStackTrace(); // O registrar el error en un log
-            request.setAttribute("mensaje", "Error del servidor, por favor intenta más tarde"); // Mensaje genérico de error
-            request.getRequestDispatcher("index.jsp").forward(request, response); // Redirigimos con el mensaje
+            e.printStackTrace(); // O loguear el error
+            request.setAttribute("mensaje", "Error del servidor, por favor intenta más tarde");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
+    
+    private void registrarUsuario(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
 
-    private void registrarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String noIdentificacion = request.getParameter("noIdentificacion");
         String nombre = request.getParameter("nombreUsuario");
         String password = request.getParameter("passwordRegistro");
@@ -133,33 +147,54 @@ public class AccesoRegistroServlet extends HttpServlet {
 
         // Validación: Verificar que las contraseñas coinciden
         if (!password.equals(confirmPassword)) {
-            response.sendRedirect("index.jsp?error=2"); // Contraseñas no coinciden
+            request.setAttribute("mensaje", "Error: Las contraseñas no coinciden.");
+            request.getRequestDispatcher("registroUsuario.jsp").forward(request, response);
             return;
         }
 
-        // Validación adicional: Asegurarse de que el usuario no esté vacío
-        if (noIdentificacion == null || noIdentificacion.isEmpty() || nombre == null || nombre.isEmpty() || password == null || password.isEmpty()) {
-            response.sendRedirect("index.jsp?error=3"); // Error si algún campo está vacío
+        // Validación: Verificar que no haya campos vacíos
+        if (noIdentificacion == null || noIdentificacion.isEmpty()
+                || nombre == null || nombre.isEmpty()
+                || password == null || password.isEmpty()) {
+
+            request.setAttribute("mensaje", "Error: Todos los campos son obligatorios.");
+            request.getRequestDispatcher("registroUsuario.jsp").forward(request, response);
             return;
         }
 
-        // Validación del formato de la identificación (opcional)
-        // Por ejemplo, asegurar que la identificación tenga una longitud mínima
+        // Validación: Verificar el formato de la identificación
         if (noIdentificacion.length() < 5) {
-            response.sendRedirect("index.jsp?error=4"); // Error si la identificación es demasiado corta
+            request.setAttribute("mensaje", "Error: La identificación debe tener al menos 5 caracteres.");
+            request.getRequestDispatcher("registroUsuario.jsp").forward(request, response);
             return;
         }
 
         try {
-            // Crear el nuevo usuario con la contraseña encriptada
+            // Crear el nuevo usuario con la contraseña encriptada (deberías encriptarla)
             Usuarios nuevoUsuario = new Usuarios(noIdentificacion, nombre, password, "Activo");
-            accesoRegistroDAO.guardar(nuevoUsuario); // Guardar el nuevo usuario
-            response.sendRedirect("index.jsp?registro=exitoso"); // Redirigir si el registro fue exitoso
+
+            // Intentar registrar al usuario
+            int resultado = accesoRegistroDAO.guardar(nuevoUsuario);
+
+            if (resultado == -1) {
+                request.setAttribute("mensaje", "Error: El usuario ya está registrado.");
+            } else if (resultado > 0) {
+                request.setAttribute("mensaje", "Usuario registrado con éxito.");
+            } else {
+                request.setAttribute("mensaje", "Error: No se pudo registrar el usuario.");
+            }
+
         } catch (Exception e) {
-            e.printStackTrace(); // Imprimir el error en los logs
-            response.sendRedirect("index.jsp?error=1"); // Redirigir con error si algo falla al registrar
+            e.printStackTrace();
+            request.setAttribute("mensaje", "Error interno al registrar el usuario.");
         }
+
+        request.getRequestDispatcher("registroUsuario.jsp").forward(request, response);
     }
+
+    
+   
+
 
     /**
      * Returns a short description of the servlet.

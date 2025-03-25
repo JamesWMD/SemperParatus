@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="CSS/productos.css">
     <link rel="stylesheet" href="CSS/usuario.css">
     
-    <title>Lista de Productos</title>
+    <title>Lista de clientes</title>
 </head>
 <body class="grid">
     <header class="header">

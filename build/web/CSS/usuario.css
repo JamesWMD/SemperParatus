@@ -1,5 +1,5 @@
 .form__usuario {
-    background-color: #f8efe4;
+    background-color: #FFFfeA;
     max-width: 1000px;
     max-height: 700px;
     display: flex;
@@ -167,8 +167,9 @@
     margin-top: 10px;
 }
 
-.container__tabla-listaUsuarios{
-    background-color: #ooo;
+.container-mensaje{
+    border-radius: 2px solid;
+    background: asin;
 }
 
 

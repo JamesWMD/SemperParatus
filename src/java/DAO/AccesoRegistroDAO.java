@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class AccesoRegistroDAO {
       
     //Método para guardar un nuevo usuario en la BD
-    public void guardar(Usuarios vusuario) {
+   /* public void guardar(Usuarios vusuario) {
         String sql = "INSERT INTO usuarios (noIdentificacion, nombreUsuario, password, estado) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = ConexionDB.getConexion();
@@ -35,7 +35,38 @@ public class AccesoRegistroDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }*/
+    public int guardar(Usuarios vusuario) {
+        String verificarSql = "SELECT COUNT(*) FROM usuarios WHERE noIdentificacion = ?";
+        String insertarSql = "INSERT INTO usuarios (noIdentificacion, nombreUsuario, password, estado) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = ConexionDB.getConexion(); PreparedStatement verificarStmt = conn.prepareStatement(verificarSql)) {
+
+            // Verifica si el usuario ya existe
+            verificarStmt.setString(1, vusuario.getNoIdentificacion());
+            ResultSet rs = verificarStmt.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                System.out.println("ERROR: El usuario con identificación " + vusuario.getNoIdentificacion() + " ya está registrado.");
+                return -1; // Indica que el usuario ya existe
+            }
+
+            // Si no existe, procede con la inserción
+            try (PreparedStatement insertarStmt = conn.prepareStatement(insertarSql)) {
+                insertarStmt.setString(1, vusuario.getNoIdentificacion());
+                insertarStmt.setString(2, vusuario.getNombreUsuario());
+                insertarStmt.setString(3, vusuario.getPassword());
+                insertarStmt.setString(4, vusuario.getEstado());
+
+                int filasAfectadas = insertarStmt.executeUpdate();
+                return (filasAfectadas > 0) ? 1 : 0; // 1 = éxito, 0 = error
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0; // Error en la BD
+        }
     }
+
     
     // Método para validar usuario y contraseña
     public Usuarios validar(String noIdentificacion, String password) {

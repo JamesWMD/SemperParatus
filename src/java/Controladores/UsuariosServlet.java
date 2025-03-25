@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Controladores;
 
 import DAO.UsuariosDAO;
@@ -59,10 +55,29 @@ public class UsuariosServlet extends HttpServlet {
             case "cerrar":
                 cerrar(request, response);
                 break;
+            case "limpiar":
+                limpiarFormulario(request, response);
+                break;
             
             default:
                 throw new AssertionError();
         }
+    }
+    
+    protected void limpiarFormulario(HttpServletRequest request, HttpServletResponse response)//FUNCIONA
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
+        // Crear objeto producto
+        Usuarios obj = new Usuarios();
+        obj.setNoIdentificacion("");
+        obj.setNombreUsuario("");
+        obj.setPassword("");
+        obj.setEstado(""); // Estado ya se obtiene del select
+     
+        
+        request.getRequestDispatcher(formUser).forward(request, response);
+
     }
     
     /* ===================== CERRAR FORMULARIO DE USUARIOS =====================*/
@@ -75,7 +90,7 @@ public class UsuariosServlet extends HttpServlet {
     }
     
     /* ============================= LISTAR USUARIOS ==========================*/
-    protected void listar(HttpServletRequest request, HttpServletResponse response)
+    public void listar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
@@ -94,7 +109,7 @@ public class UsuariosServlet extends HttpServlet {
     }
     
     /* ============================= GUARDAR USUARIOS ==========================*/
-    private void guardar(HttpServletRequest request, HttpServletResponse response)
+    public void guardar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Obtener valores del formulario
@@ -123,19 +138,22 @@ public class UsuariosServlet extends HttpServlet {
 
         // Guardar usuario
         int result = userDao.registrarUsuario(obj);
-
-        if (result > 0) {
+        
+        
+        if (result == -1) {
+            request.setAttribute("mensaje", "ERROR: EL USUARIO YA EXISTE");
+        } else if (result > 0) {
             request.setAttribute("mensaje", "USUARIO REGISTRADO CORRECTAMENTE");
         } else {
             request.setAttribute("mensaje", "ERROR: USUARIO NO REGISTRADO");
             request.setAttribute("usuarios", obj); // Devolver datos en caso de error
         }
         request.setAttribute("usuarios", userDao.ListarTodosUsuario());
-        request.getRequestDispatcher(pagListar).forward(request, response);
+        request.getRequestDispatcher(formUser).forward(request, response);
     }
     
     /* ============================= EDITAR USUARIOS ==========================*/
-    private void seleccionar(HttpServletRequest request, HttpServletResponse response)
+    public void seleccionar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         String noIdentificacion = request.getParameter("noIdentificacion");
@@ -145,6 +163,7 @@ public class UsuariosServlet extends HttpServlet {
         if (obj != null) {
             request.setAttribute("usuario", obj); // Clave correcta en el JSP
             request.getRequestDispatcher(formUser).forward(request, response);
+            
         } else {
             request.getSession().setAttribute("error", "No se encontro usuario con No. Identificacion " + noIdentificacion);
             response.sendRedirect("UsuariosServlet?action=listar");
@@ -153,7 +172,7 @@ public class UsuariosServlet extends HttpServlet {
     }
     
     /* ============================= BUSCAR USUARIOS ==========================*/
-    private void buscar(HttpServletRequest request, HttpServletResponse response)
+    public void buscar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String noIdentificacion = request.getParameter("noIdentificacion");
 
@@ -177,7 +196,7 @@ public class UsuariosServlet extends HttpServlet {
     
     /* ============================= MODIFICAR USUARIOS ==========================*/
     
-    private void modificar(HttpServletRequest request, HttpServletResponse response)
+    public void modificar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Obtener valores del formulario
@@ -217,7 +236,7 @@ public class UsuariosServlet extends HttpServlet {
         request.getRequestDispatcher(pagListar).forward(request, response);
     }
     
-    private void eliminar(HttpServletRequest request, HttpServletResponse response)
+    public void eliminar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // Obtener valores del formulario

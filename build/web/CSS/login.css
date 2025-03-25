@@ -200,7 +200,7 @@ body{
 /* REGISTRO */
 
 .registro {
-    display: none;
+    display: flex;
     gap: 0px;
     flex-direction: column;
     align-items: center;
@@ -271,6 +271,16 @@ body{
 }
 .footer__link:hover {
     text-decoration: underline;
+}
+
+.contenedor-mensaje{
+    border: solid 1px #000;
+    background: lightpink;
+    margin-top: 20px;
+}
+
+.mensaje{
+    align-items: center;
 }
 
 

@@ -148,15 +148,19 @@ public class ClientesServlet extends HttpServlet {
 
         // Guardar producto
         int result = clieDao.registrarCliente(obj);
-
-        if (result > 0) {
-            request.setAttribute("success", "CLIENTE REGISTRADO CORRECTAMENTE");
+        
+        if (result == -1) {
+            request.setAttribute("mensaje", "ERROR: EL CLIENTE YA EXISTE");
+        } else if (result > 0) {
+            request.setAttribute("mensaje", "CLIENTE REGISTRADO CORRECTAMENTE");
+            request.getRequestDispatcher(formClientes).forward(request, response);
         } else {
-            request.setAttribute("error", "ERROR: CLIENTE NO REGISTRADO");
+            request.setAttribute("mensaje", "ERROR: CLIENTE NO REGISTRADO");
             request.setAttribute("cliente", obj); // Devolver datos en caso de error
+            request.getRequestDispatcher(formClientes).forward(request, response);
         }
-        request.setAttribute("clientes", clieDao.ListarTodosClientes());
-        request.getRequestDispatcher(pagListar).forward(request, response);
+        //request.setAttribute("clientes", clieDao.ListarTodosClientes());
+        request.getRequestDispatcher(formClientes).forward(request, response);
     }
 
     /* ============================= SELECCIONAR CLIENTE ==========================*/

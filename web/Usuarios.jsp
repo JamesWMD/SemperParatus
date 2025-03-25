@@ -3,6 +3,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%
+    HttpSession sessionUser = request.getSession(false);
+    Usuarios vusuario = (sessionUser != null) ? (Usuarios) sessionUser.getAttribute("usuario") : null;
+
+    if (vusuario == null) {
+        response.sendRedirect("index.jsp?error=noAutorizado");
+        return;
+    }
+%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +23,7 @@
     <link rel="stylesheet" href="CSS/f_ventas.css">
     <link rel="stylesheet" href="CSS/usuario.css">
     
-    <title>Panel Pricipal</title>
+    <title>Gestion de Usuario</title>
 </head>
 <body class="grid">
     <header class="header">
@@ -71,7 +81,7 @@
              <!-- Submenu del modulos Comercial -->
         <div class="main-menu__container" id="menu-container-comercial">
             <div class="main-menu__item" id="menu-item-factura-venta">
-                <a href="#" class="main-menu__link">
+                <a href="ventas.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--factura-venta">Factura de Venta</button>
                 </a>
             </div>
@@ -170,17 +180,14 @@
                 <h2 class="form_tittle">GESTION DE USUARIO</h2>
             </div>
             <h3 class="tittle" >Nuevo Usuario</h3>
-            <%-- Mostrar mensaje de error si existe --%>
-            <c:if test="${not empty mensaje}">
-                <h4 class="mensaje form_mensaje form_mensaje-usuario">${mensaje}</h4>
-            </c:if>
+           
             <fieldset class="form__actions form__actions--botones-usuario">
                 <legend class="form__legend">Acciones de Usuario</legend>
                 
                 <!-- Acción Buscar -->
                 <div class="button-container">
                     <p class="form__text" for="">Buscar Usuario</p>
-                    <button type="submit" name="action" class="form__button" value="buscar">
+                    <button type="submit" name="action" class="form__button btn-buscar" value="buscar">
                         <img src="IMG/buscarUsuarios.png" alt="Buscar Usuario">
                     </button>
                 </div>
@@ -188,7 +195,7 @@
                 <!-- Acción Listar-->
                 <div class="button-container">
                     <p class="form__text" for="">Listar Usuarios</p>
-                    <button type="summit" name="action" class="form__button" value="listar">
+                    <button type="submit" name="action" class="form__button btn-listar" value="listar">
                         <img src="IMG/ListarPersona.png" alt="Lista Usuarios">
                     </button>
                 </div>
@@ -196,7 +203,7 @@
                 <!-- Acción Limpiar -->
                 <div class="button-container">
                     <p class="form__text" for="">Limpiar Formulario</p>
-                    <button type="reset" class="form__button">
+                    <button type="submit" name="action" class="form__button" value="limpiar">
                         <img src="IMG/limpieza-de-datos.png" alt="Limpiar formulario">
                     </button>
                 </div>
@@ -204,7 +211,7 @@
                 <!-- Acción Modificar -->
                 <div class="button-container">
                     <p class="form__text" for="">Modificar Usuario</p>
-                    <button type="submit" class="form__button" name="action" value="modificar">
+                    <button type="submit" class="form__button btn-modificar" name="action" value="modificar">
                         <img src="IMG/modificar_usuario.png" alt="Modificar usuario">
                     </button>
                 </div>
@@ -212,7 +219,7 @@
                 <!-- Acción Guardar -->
                 <div class="button-container">
                     <p class="form__text form__test-guardar" for="">Crear Usuario</p>
-                    <button type="submit" class="form__button" name="action" value="guardar">
+                    <button type="submit" class="form__button btn-guardar" name="action" value="guardar">
                         <img src="IMG/crear_usuario.png" alt="Crear Usuario">
                     </button>
                 </div>
@@ -220,7 +227,7 @@
                 <!-- Acción Eliminar -->
                 <div class="button-container">
                     <p class="form__text" for="">Eliminar Usuario</p>
-                    <button type="submit" class="form__button" name="action" value="eliminar">
+                    <button type="submit" class="form__button btn-eliminar" name="action" value="eliminar">
                         <img src="IMG/eliminar_usuario.png" alt="Eliminar Usuario">
                     </button>
                 </div>
@@ -277,8 +284,8 @@
                     <div class="form__field-usuario form__field--usuario-estado">
                         <label for="estado" class="form__label">Estado</label>
                         <select name="estado" id="estado" class="form__input">
-                            <option value="Activo" ${usuario.estado == 'Activo' ? 'selected' : ''}>Activo</option>
-                            <option value="Inactivo" ${usuario.estado == 'Inactivo' ? 'selected' : ''}>Inactivo</option>
+                            <option class="opt_activo" value="Activo" ${usuario.estado == 'Activo' ? 'selected' : ''}>Activo</option>
+                            <option class="opt_inactivo" value="Inactivo" ${usuario.estado == 'Inactivo' ? 'selected' : ''}>Inactivo</option>
                         </select>  
                     </div>
                     
@@ -287,7 +294,14 @@
                         
             <!-- Campo oculto para la acción -->
             <input type="hidden" name="action" value="buscar" id="actionField">
-            <input type="hidden" name="noIdentificacion" value="${usuario.noIdentificacion}">
+            <input type="hidden" name="noIdentificacion" value="${vusuario.noIdentificacion}">
+            
+            <%-- Mostrar mensaje de error si existe --%>
+            <c:if test="${not empty mensaje}">
+                <div class="container-mensaje">
+                    <h4 class="mensaje form_mensaje form_mensaje-usuario">${mensaje}</h4>
+                </div>
+            </c:if>
             
         </form>
 
@@ -307,7 +321,7 @@
 
     <script src="JS/scripts.js"></script>
     <script src="JS/usuarios.js"></script>
-    <script src="JS/factVentas.js"></script> 
+    <script src="JS/factVentas.js"></script>
     
 </body>
 </html>

@@ -6,9 +6,12 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import javax.servlet.ServletException;
 
 
 public class ProductosDAO {
@@ -64,15 +67,17 @@ public class ProductosDAO {
                 obj.setCodigoProducto(rs.getString("codigoProducto"));
                 obj.setNombreProducto(rs.getString("nombreProducto"));
                 obj.setCategoria(rs.getString("categoria"));
+                obj.setPrecio(rs.getBigDecimal("precio")); // Cambio aquí
+                obj.setStock(rs.getInt("stock")); // Cambio aquí
                 /*obj.setPrecio(BigDecimal.valueOf(Double.parseDouble(rs.getString("precio")))); // POR COMPROBAR SI FUNCIONA*/
-                String precioStr = rs.getString("precio");
+                /*String precioStr = rs.getString("precio");
                 if (precioStr != null && !precioStr.trim().isEmpty()) {
                     obj.setPrecio(new BigDecimal(precioStr.trim()));
                 } else {
                     obj.setPrecio(BigDecimal.ZERO); // Valor por defecto si está vacío
                 }
                 //obj.setPrecio(new BigDecimal(rs.getString("precio").trim()));
-                obj.setStock(Integer.parseInt(rs.getString("stock")));
+                obj.setStock(Integer.parseInt(rs.getString("stock")));*/
                 obj.setEstado(rs.getString("estado"));
                 obj.setDescripcion(rs.getString("descripcion"));
                 
@@ -106,14 +111,21 @@ public class ProductosDAO {
     public int registrarProducto(Productos obj){
         int result = 0;
         
-        if (existeCodigoProducto(obj.getCodigoProducto())) {
-            System.out.println("El código de producto ya existe. No se puede insertar.");
-            return 0;
-        }
-        
         try{
             cn = ConexionDB.getConnection(); // se invoca la clase ConexionDB y su metodo getConnection()
-            String sql = "INSERT INTO productos (codigoProducto,nombreProducto, categoria, precio, stock, estado, descripcion) VALUES (?,?,?,?,?,?,?)"; // La sentencia SQL para crear un nuevo producto
+            
+            // Verificar si el producto ya está registrado
+            String checkSql = "SELECT COUNT(*) FROM productos WHERE codigoProducto = ?";
+            ps = cn.prepareStatement(checkSql);
+            ps.setString(1, obj.getCodigoProducto());
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                // El producto ya está registrado
+                return -1; // Puedes usar un código específico para indicar que el producto ya existe
+            }
+            
+            String sql = "INSERT INTO productos (codigoProducto, nombreProducto, categoria, precio, stock, estado, descripcion) VALUES (?,?,?,?,?,?,?)"; // La sentencia SQL para crear un nuevo producto
             ps = cn.prepareStatement(sql); // Prepara la sentencia SQL
             ps.setString(1,obj.getCodigoProducto());
             ps.setString(2,obj.getNombreProducto());
@@ -275,6 +287,52 @@ public class ProductosDAO {
         return result;
     }
     
-   
+    public List<Productos> filtrarProductos(String nombre, String categoria, String estado) {
+        List<Productos> lista = new ArrayList<>();
+        String sql = "SELECT * FROM productos WHERE 1=1";
+
+        List<Object> params = new ArrayList<>();
+
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            sql += " AND nombreProducto LIKE ?";
+            params.add("%" + nombre.trim() + "%");
+        }
+
+        if (categoria != null && !categoria.trim().isEmpty()) {
+            sql += " AND categoria = ?";
+            params.add(categoria.trim());
+        }
+
+        if (estado != null && !estado.trim().isEmpty()) {
+            sql += " AND estado = ?";
+            params.add(estado.trim());
+        }
+
+        try (Connection con = ConexionDB.getConexion(); PreparedStatement ps = con.prepareStatement(sql)) {
+
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Productos p = new Productos();
+                p.setCodigoProducto(rs.getString("codigoProducto"));
+                p.setNombreProducto(rs.getString("nombreProducto"));
+                p.setCategoria(rs.getString("categoria"));
+                p.setPrecio(rs.getBigDecimal("precio"));
+                p.setStock(rs.getInt("stock"));
+                p.setEstado(rs.getString("estado"));
+                p.setDescripcion(rs.getString("descripcion"));
+                lista.add(p);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
     
 }

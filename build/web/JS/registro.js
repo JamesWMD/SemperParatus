@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==================== Alternar Formularios (Login/Registro) ====================
-    const loginForm = document.querySelector('.login'); // Formulario de login
+  /*  const loginForm = document.querySelector('.login'); // Formulario de login
     const registroForm = document.querySelector('.registro'); // Formulario de registro
     const linkToRegistro = document.querySelector('.login__link'); // Enlace para ir al registro
     const linkToLogin = document.querySelector('.registro__link'); // Enlace para ir al login
@@ -41,8 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
             registroForm.style.display = 'none';
             loginForm.style.display = 'flex';
         });
-    }
+    }*/
 
+        
     // ==================== Validación de Contraseñas ====================
     const passwordInput = document.querySelector('.registro__input--password');
     const repeatPasswordInput = document.querySelector('.registro__input--repet-password');
@@ -93,6 +94,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ejecutar la validación al cargar la página
     verifyFields();
+    
+      
+    
+        // ==================== Validación de ID ====================
+    const idInput = document.querySelector('.registro__input--noIdentificacion');
+    const submitButton2 = document.querySelector('.registro__button');
+    idInput.addEventListener('input', verifyIdLength);
+    function verifyIdLength() {
+        const idValue = idInput.value.trim(); // Eliminar espacios innecesarios
+
+        if (idValue.length < 5) { // Si la identificación tiene menos de 5 caracteres
+            submitButton2.disabled = true;
+            submitButton2.style.backgroundColor = 'blue';
+            submitButton2.textContent = 'El No. de Doc. debe tener al menos 5 números';
+            submitButton2.style.fontSize = '12px';
+            submitButton2.style.color = 'white';
+        } else {
+            submitButton2.disabled = false;
+            submitButton2.style.backgroundColor = ''; // Restaurar color original
+            submitButton2.textContent = 'Registrate'; // Restaurar texto original
+            submitButton2.style.fontSize = ''; // Restaurar tamaño original
+            submitButton2.style.color = '';
+        }
+    }
+
+
 });
 
 

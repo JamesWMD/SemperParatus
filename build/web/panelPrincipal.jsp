@@ -1,10 +1,3 @@
-<%-- 
-    Document   : panelPrincipal
-    Created on : 28 ene. 2025, 02:43:14
-    Author     : JAMES
---%>
-
-
 <%@page import="Modelos.Usuarios"%>
 <%@page import="javax.servlet.http.HttpSession" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -92,12 +85,12 @@
              <!-- Submenu del modulos Comercial -->
         <div class="main-menu__container" id="menu-container-comercial">
             <div class="main-menu__item" id="menu-item-factura-venta">
-                <a href="#" class="main-menu__link">
+                <a href="ventas.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--factura-venta">Factura de Venta</button>
                 </a>
             </div>
             <div class="main-menu__item" id="menu-item-factura-compra">
-                <a href="#" class="main-menu__link">
+                <a href="ventas.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--factura-compra" disabled>Factura de Compra</button>
                 </a>
             </div>
@@ -179,9 +172,9 @@
                 </a>
             </div>
         </div>
-
+        
         <!-- FORMULARIO DE FACTURA DE VENTA -->
-
+<!--
         <form class=" form form__facVenta" action="" method="">
             <div class="tittle">
                 <img src="IMG/factura.png" alt="" srcset="">
@@ -208,7 +201,7 @@
 
 
                 <!-- Botones -->
-                <fieldset class="form__actions form__actions--botones">
+               <!-- <fieldset class="form__actions form__actions--botones">
                     <legend class="form__legend">Botones</legend>
                     <div class="button-container">
                         <p class="form__text" for="">Producto</p>
@@ -274,7 +267,7 @@
             </section>
 
             <!-- Datos del cliente -->
-            <fieldset class="form__fields form__fields--clientes">
+           <!-- <fieldset class="form__fields form__fields--clientes">
                 <legend class="form__legend">Datos del Cliente</legend>
                 <div class="form__field--cliente">
                     <label for="identificacion" class="form__label">T. Doc.</label>
@@ -316,7 +309,7 @@
             </fieldset>
 
             <!-- Informacion de ventas -->
-            <fieldset class="form__fields form__fields--infoVentas">
+            <!--<fieldset class="form__fields form__fields--infoVentas">
                 <legend class="form__legend">Información de la Venta</legend>
                 <div class="form__field--infoVenta form__field--infoVenta-condicionPago">
                     <label for="identificacion" class="form__label">Cond. de Pago</label>
@@ -353,7 +346,7 @@
             </fieldset>
 
             <!-- Detalle de Productos -->
-            <fieldset class="form__fields form__fields--productos">
+           <!-- <fieldset class="form__fields form__fields--productos">
                 <legend class="form__legend">Detalle de Productos</legend>
                 <div class="form__field--producto form__field--producto-codigo">
                     <label for="codigo" class="form__label">Cod. Prod</label>
@@ -387,7 +380,7 @@
             <section class="factura">
                 <div class="factura__productos">
                     <!-- Tabla de productos -->
-                    <div class="tabla-contenedora">
+                    <!--<div class="tabla-contenedora">
                         <table class="factura__tabla-productos" id="tabla-productos">
                             <thead>
                                 <tr>
@@ -428,7 +421,7 @@
                     </fieldset>
 
                     <!-- Tabla de Totales -->
-                    <table class="tablaTotales" id="tabla-totales">
+                   <!-- <table class="tablaTotales" id="tabla-totales">
                         <tr id="fila-subtotal" class="fila-totales">
                             <td><strong>Subtotal:</strong></td>
                             <td id="subtotal-total">$0.00</td>
@@ -465,106 +458,7 @@
                     
                 </div>
             </section>            
-        </form>
-
-        <!-- FORMULARIO DE GESTION DE PRODUCTOS 
-
-        <form class="form__gestion-productos" action="ProductosServlet" method="post">
-            <div class="tittle">
-                <img src="IMG/ajustra_producto.png" alt="" srcset="">
-                <H2 class="form_tittle" >GESTION DE PRODUCTOS</H2>
-            </div>
-        
-            <section>
-                <fieldset class="form__actions form__actions--botones-gestionProductos">
-                    <legend class="form__legend">Acciones del formulario</legend>
-                    <div class="button-container">
-                        <p class="form__text" for="">Producto</p>
-                        <button onclick="" class="form__button">
-                            <img src="IMG/caja-de-entrega.png" alt="Listar productos">
-                        </button>
-                    </div>
-                    <div class="button-container">
-                        <p class="form__text" for="">Limpiar</p>
-                        <button onclick="" class="form__button">
-                            <img src="IMG/limpieza-de-datos.png" alt="Limpiar datos">
-                        </button>
-                    </div>
-                    <div class="button-container">
-                        <p class="form__text" for="">Modificar</p>
-                        <button type="button" onclick="enviarFormulario('modificar')" class="form__button">
-                            <img src="IMG/Modificar.png" alt="Modificar datos">
-                        </button>
-                    </div>
-                    <div class="button-container">
-                        <p class="form__text" for="">Guardar</p>
-                        <button type="button" onclick="enviarFormulario('guardar')" class="form__button">
-                            <img src="IMG/guardar-datos.png" alt="Guardar datos">
-                        </button>
-                    </div>
-                    <div class="button-container">
-                        <p class="form__text" for="">Eliminar</p>
-                        <button type="button" onclick="enviarFormulario('eliminar')" class="form__button">
-                            <img src="IMG/basura.png" alt="Eliminar datos">
-                        </button>
-                    </div>
-                    <div class="button-container">
-                        <p class="form__text" for="">Cerrar</p>
-                        <button onclick="cerrarFormularioProducto()" class="form__button form__button-cerrar">
-                            <img src="IMG/cerrar.png" alt="Cerrar formulario">
-                        </button>
-                    </div>
-                </fieldset>
-            </section>
-
-            <h4 class="form_mensaje form_mensaje-gestionProductos">Gestiona el formulario</h4>
-            
-            <fieldset class="form__fields form__fields--gestion-productos_DatosProductos">
-                <legend class="form__legend">Datos del producto</legend>
-                <div class="form__field--container_gestion-productos_DatosProductos">
-                    
-                    <div class="form__field--producto form__field--producto-codigo">
-                        <label for="codigo" class="form__label">Cod. Prod</label>
-                        <input type="hidden" name="accion" id="accion" value="" class="form__input--producto form__input--codigo">
-                    </div>
-                    
-                    <div class="form__field--producto form__field--producto-nombreProducto">
-                        <label for="nombreProducto" class="form__label">Nombre del Producto</label>
-                        <input type="hidden" name="accion" id="accion" value="" class="form__input--producto form__input--nombreProducto">
-                    </div>
-                    
-                    <div class="form__field--producto form__field--producto-categoria">
-                        <label for="categoria" class="form__label">Categoria</label>
-                        <input type="hidden" name="accion" id="accion" value="" class="form__input--producto form__input--categoria" readonly>
-                    </div>
-                    
-                    <div class="form__field--producto form__field--producto-precio">
-                        <label for="precio" class="form__label">Precio</label>
-                        <input type="hidden" name="accion" id="accion" value="" class="form__input--producto formatear form__input--precio">
-                    </div>
-                    
-                    <div class="form__field--producto form__field--producto-descuento">
-                        <label for="descuento" class="form__label">Stock</label>
-                        <input type="hidden" name="accion" id="accion" value="" class="form__input--producto formatear  form__input--descuento">
-                    </div>
-                    
-                    <div class="form__field--producto form__field--producto-estado">
-                        <label for="estado" class="form__label">Estado</label>
-                        <select name="estado" id="estado" class="form__input--select">
-                            <option value="" disabled selected>Seleccionar...</option>
-                            <option value="Activo">Activo</option>
-                            <option value="Inactivo">Inactivo</option>
-                        </select>  
-                    </div>
-                </div>
-                <div class="form__fields--gestion-productos_datosProductos-descripcion">
-                    <label for="">Descripcion del producto</label>
-                    <textarea name="" id=""></textarea>
-                </div>
-                
-            </fieldset>
         </form> -->
-
 
     </main>
 

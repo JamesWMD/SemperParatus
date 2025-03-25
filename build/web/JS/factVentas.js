@@ -1,3 +1,8 @@
+// Formato de número
+/*function formatNumber(num) {
+    return num.toLocaleString('en-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}*/
+
 // Selección del botón "Productos" y el formulario de gestión de productos
 const botonFactVenta = document.querySelector('.main-menu__button--factura-venta');
 const formularioFactVenta = document.querySelector('.form__facVenta');
@@ -157,10 +162,6 @@ function actualizarTotales() {
     document.querySelector('.tablaTotales tr.total td:nth-child(2)').textContent = `$${formatNumber(totalAPagar)}`;
 }
 
-// Formato de número
-function formatNumber(num) {
-    return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
 
 // FACTURA DE VENTAS (Calcular subtotal automáticamente al cambiar cantidad o precio)
 document.getElementById('cantidad').addEventListener('input', calcularSubtotal);
@@ -178,3 +179,72 @@ function calcularSubtotal() {
         maximumFractionDigits: 2
     });
 }
+
+//BUSCAR CLIENTE SIN RECARGAR LA PAGINA
+$(document).ready(function () {
+    $("#buscarBtn").click(function (event) {
+        event.preventDefault(); // Evita la recarga de la página
+
+        var idCliente = $("#idCliente").val(); // Obtener el valor del input
+
+        if (idCliente.trim() === "") {
+            alert("Debe ingresar el ID del Cliente 2.");
+            return;
+        }
+
+        $.ajax({
+            url: "VentasServlet", // La URL del servlet
+            type: "GET", // Método HTTP
+            data: {action: "buscarCliente", idCliente: idCliente}, // Parámetros
+            dataType: "json", // Esperamos JSON como respuesta
+            success: function (response) {
+                if (response.error) {
+                    alert(response.error); // Mostrar error si no se encontró
+                } else {
+                    // Si el cliente existe, mostramos los datos en la página
+                    $('#nombreCliente').val(response.nombreCliente);
+                    $('#apellidoCliente').val(response.apellidoCliente);
+                    $('#telefonoCliente').val(response.telefonoCliente);
+                    $('#direccionCliente').val(response.direccionCliente);
+                }
+            },
+            error: function () {
+                alert("El cliente no exite debe crearlo.");
+            }
+        });
+    });
+});
+
+//BUSCAR PRODUCTO SIN RECARGAR LA PAGINA
+$(document).ready(function () {
+    $("#buscarBtnP").click(function (event) {
+        event.preventDefault(); // Evita la recarga de la página
+
+        var codigoProducto = $("#codigoProducto").val(); // Obtener el valor del input
+
+        if (codigoProducto.trim() === "") {
+            alert("Debe ingresar el Codigo del producto.");
+            return;
+        }
+
+        $.ajax({
+            url: "VentasServlet", // La URL del servlet
+            type: "GET", // Método HTTP
+            data: {action: "buscarProducto", codigoProducto: codigoProducto}, // Parámetros
+            dataType: "json", // Esperamos JSON como respuesta
+            success: function (response) {
+                if (response.error) {
+                    alert(response.error); // Mostrar error si no se encontró
+                } else {
+                    // Si el cliente existe, mostramos los datos en la página
+                    $('#nombreProducto').val(response.nombreProducto);
+                    $('#categoria').val(response.categoria);
+                    $('#precio').val(response.precio);
+                }
+            },
+            error: function () {
+                alert("l producto no existe debe crearlo");
+            }
+        });
+    });
+});

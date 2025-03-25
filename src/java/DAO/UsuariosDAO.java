@@ -58,7 +58,7 @@ public class UsuariosDAO {
         return lista;
     }
     
-    public int registrarUsuario(Usuarios obj){
+    /*public int registrarUsuario(Usuarios obj){
         int result = 0;
         
         try{
@@ -89,7 +89,53 @@ public class UsuariosDAO {
         }
         
         return result;
+    }*/
+    
+    public int registrarUsuario(Usuarios obj) {
+    int result = 0;
+
+    try {
+        cn = ConexionDB.getConnection(); // Se invoca la clase ConexionDB y su método getConnection()
+
+        // Verificar si el usuario ya está registrado
+        String checkSql = "SELECT COUNT(*) FROM usuarios WHERE noIdentificacion = ?";
+        ps = cn.prepareStatement(checkSql);
+        ps.setString(1, obj.getNoIdentificacion());
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next() && rs.getInt(1) > 0) {
+            // El usuario ya está registrado
+            return -1; // Puedes usar un código específico para indicar que el usuario ya existe
+        }
+
+        // La sentencia SQL para crear un nuevo usuario
+        String sql = "INSERT INTO usuarios(noIdentificacion, nombreUsuario, password, estado) VALUES (?, ?, ?, ?)";
+        ps = cn.prepareStatement(sql); // Prepara la sentencia SQL
+        ps.setString(1, obj.getNoIdentificacion());
+        ps.setString(2, obj.getNombreUsuario());
+        ps.setString(3, obj.getPassword());
+        ps.setString(4, obj.getEstado());
+
+        result = ps.executeUpdate(); // Ejecuta la inserción
+
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    } finally { // Cerramos la conexión
+        try {
+            if (cn != null) {
+                cn.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
+
+    return result; // Devuelve el resultado de la inserción (0 o 1)
+}
+
     
     public Usuarios buscarUsuario(String noIdentificacion){
         Usuarios obj = null;

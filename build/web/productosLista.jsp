@@ -169,6 +169,30 @@
             
             <jsp:include page="Components/mensaje.jsp"/>
             
+            <form action="ProductosServlet" method="GET">
+                <input type="hidden" name="action" value="filtrar">
+
+                <label>Nombre:</label>
+                <input type="text" name="nombreProducto">
+
+                <label>Categoría:</label>
+                <select name="categoria">
+                    <option value="">Todas</option>
+                    <option value="Postres">Postres</option>
+                    <option value="Tortas">Tortas</option>
+                </select>
+
+                <label>Estado:</label>
+                <select name="estado">
+                    <option value="">Todos</option>
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                </select>
+
+                <button type="submit">Filtrar</button>
+            </form>
+
+            
             <div class="button-container">
                 <p class="form__text" for="">Nuevo Producto</p>
                 <a class="btnNuevo" href="ProductosServlet?action=nuevo">
@@ -217,6 +241,8 @@
                 </table>
             </div>
         </div>
+            
+
 
     </main>
 

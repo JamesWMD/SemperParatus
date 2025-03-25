@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/JS/scripts1.js</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/src/java/Modelos/Ventas.java</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/index.jsp</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/JS/factVentas.js</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/src/java/Utilidades/ConexionDB.java</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/src/java/Controladores/VentasServlet.java</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/JS/separadorMiles.js</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/JS/ajax.js</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/web/ventas.jsp</file>
+            <file>file:/C:/Users/JAMES/Documents/NetBeansProjects/SemperParatus/src/java/DAO/VentasDAO.java</file>
+        </group>
     </open-files>
 </project-private>

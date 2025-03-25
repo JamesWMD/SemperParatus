@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,9 +32,9 @@
                 <img class="login__logo" src="IMG/Logo Semper Paratus Oscuro.png" alt="Logo Semper Paratus">
                 <h2 class="login__title">SEMPER PARATUS</h2>
                 <p class="login__text">¿No te has registrado? 
-                    <a class="login__link" href="#">Regístrate</a>
+                    <a class="login__link" id="registro_link" href="registroUsuario.jsp">Regístrate</a>
                 </p>
-                <form class="login__form" action="AccesoRegistroServlet" method="POST" autocomplete="off">
+                <form class="login__form" action="AccesoRegistroServlet" method="POST">
                     <!-- Campo oculto para especificar la acción -->
                     <input type="hidden" name="action" value="login">
                     
@@ -41,7 +42,7 @@
                         <div class="login__icon login__icon--user">
                             <img class="login__icon-image login__icon-image--user" src="IMG/carne-de-identidad.png" alt="">
                         </div>
-                        <input class="login__input login__input--user" type="text" name="usuario" placeholder="No. Identificacion">
+                        <input class="login__input login__input--user" id="usuario" type="text" name="usuario" placeholder="No. Identificacion" autocomplete="off">
                     </div>
                     <div class="login__field login__field--password">
                         <div class="login__icon login__icon--password">
@@ -49,26 +50,34 @@
                         </div>
                         <div>
                             <input class="login__input login__input--password" id="password" type="password" name="password" placeholder="Contraseña">
-                            <img src="IMG/ojo-cerrado (1).png" alt="Ver contraseña" class="form__icon" onclick="togglePassword()">
+                            <img src="IMG/ojo-cerrado (1).png" alt="Ver contraseña" class="form__icon" onclick="togglePassword()" autocomplete="off">
                         </div>                        
                     </div>
                     
                     
                     <button type="submit" class="login__button">Inicia Sesion</button>
-                        <%-- Mostrar mensaje de error si existe --%>
-                        <% String mensaje = (String) request.getAttribute("mensaje"); %>
-                        <% if (mensaje != null) { %>
+                    
+                    <%-- Mostrar mensaje de error si existe 
+                    <% String mensaje = (String) request.getAttribute("mensaje"); %>
+                    <% if (mensaje != null) { %>
+                    <div class="contenedor-mensaje">
+
+                        <h4 class="mensaje">Usuario no autorizado cknojnod</h4>
+
+                    </div>
+                    <% } %>
+                    --%>
+                    <c:if test="${not empty mensaje}">
                         <div class="contenedor-mensaje">
-            
-                            <h4 class="mensaje">Usuario no autorizado</h4>
-                            
+                            <h4 class="mensaje form_mensaje form_mensaje-producto">${mensaje}</h4>
                         </div>
-                        <% } %>
+                        
+                    </c:if>
                     
                 </form>                
             </div>  
             
-            <!-- REGISTRO -->
+            <!-- REGISTRO 
             <div class="registro">
                 <img class="registro__logo" src="IMG/Logo Semper Paratus Oscuro.png" alt="Logo Semper Paratus">
                 <h2 class="registro__title">SEMPER PARATUS</h2>
@@ -78,28 +87,28 @@
                 <div>
                 </div>
                 <form class="registro__form" action="AccesoRegistroServlet" method="POST" autocomplete="off">
-                    <!-- Campo oculto para especificar la acción -->
+                    <!-- Campo oculto para especificar la acción
                     <input type="hidden" name="action" value="registro">
                     
                     <div class="registro__field registro__field--noIdentificacion">
                         <div class="registro__icon registro__icon--noIdentificacion">
                             <img class="registro__icon-image registro__icon-image--noIdentificacion" src="IMG/carne-de-identidad.png" alt="">
                         </div>
-                        <input class="registro__input registro__input--noIdentificacion" id="noIdentificacion" type="text" name="noIdentificacion" placeholder="No. Identificacion">
+                        <input class="registro__input registro__input--noIdentificacion" id="noIdentificacion" type="text" name="noIdentificacion" placeholder="No. Identificacion" autocomplete="off">
                     </div>
 
                     <div class="registro__field registro__field--nombreUsuario">
                         <div class="registro__icon login__icon--nombreUsuario">
                             <img class="registro__icon-image resgitro__icon-image--nombreUsuario" src="IMG/perfil.png" alt="">
                         </div>
-                        <input class="registro__input registro__input--nombreUsuario"  type="text" name="nombreUsuario" placeholder="Nombres y Apellidos">
+                        <input class="registro__input registro__input--nombreUsuario" id="nombreUsuario"  type="text" name="nombreUsuario" placeholder="Nombres y Apellidos" autocomplete="off">
                     </div>
 
                     <div class="registro__field registro__field--password">
                         <div class="registro__icon registro__icon--password">
                             <img class="registro__icon-image registro__icon-image--password" src="IMG/llave-de-casa.png" alt="">
                         </div>
-                        <input class="registro__input registro__input--password" id="password" type="password" name="passwordRegistro" placeholder="Contraseña" >
+                        <input class="registro__input registro__input--password" id="password" type="password" name="passwordRegistro" placeholder="Contraseña" autocomplete="off" >
                         <img src="IMG/ojo-cerrado (1).png" alt="Ver contraseña" class="form__icon-registro" onclick="">
                     </div>
                     
@@ -107,13 +116,14 @@
                         <div class="registro__icon registro__icon--repet-password">
                             <img class="registro__icon-image registro__icon-image--password" src="IMG/llave-de-la-puerta.png" alt="">
                         </div>
-                        <input class="registro__input registro__input--repet-password" id="repet-password" type="password" name="repetPassword" placeholder="Confirma la contraseña" >
+                        <input class="registro__input registro__input--repet-password" id="repet-password" type="password" name="repetPassword" placeholder="Confirma la contraseña" autocomplete="off">
                         <img src="IMG/ojo-cerrado (1).png" alt="Ver contraseña" class="form__icon-registro" onclick="">
                     </div>
                     
                     <button type="submit" class="registro__button">Registrarse</button>
-                </form>                
-            </div>  
+                </form>           
+            </div>
+            -->
         </main>
         <footer class="footer">
             <div>

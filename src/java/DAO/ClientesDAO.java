@@ -92,38 +92,51 @@ public class ClientesDAO {
         return lista;
     }
     
-    public int registrarCliente(Clientes obj){
+    public int registrarCliente(Clientes obj) {
         int result = 0;
-        
-        try{
+
+        try {
             cn = ConexionDB.getConnection(); // se invoca la clase ConexionDB y su metodo getConnection()
+
+            // Verificar si el cliente ya está registrado
+            String checkSql = "SELECT COUNT(*) FROM clientes WHERE IdCliente = ?";
+            ps = cn.prepareStatement(checkSql);
+            ps.setString(1, obj.getIdCliente());
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                // El cliente ya está registrado
+                return -1; // Puedes usar un código específico para indicar que el producto ya existe
+            }
+
+            // La sentencia SQL para crear un nuevo Cliente
             String sql = "INSERT INTO clientes(idCliente,tipoDocumento,nombreCliente,apellidoCliente,telefonoCliente,direccionCliente) VALUES (?,?,?,?,?,?)"; // La sentencia SQL para crear un nuevo usuario
             ps = cn.prepareStatement(sql); // Prepara la sentencia SQL
-            ps.setString(1,obj.getIdCliente());
-            ps.setString(2,obj.getTipoDocumento());
-            ps.setString(3,obj.getNombreCliente());
-            ps.setString(4,obj.getApellidoCliente());
-            ps.setString(5,obj.getTelefonoCliente());
-            ps.setString(6,obj.getDireccionCliente());
-            
-            result = ps.executeUpdate();   
-            
-        }catch(Exception ex){
+            ps.setString(1, obj.getIdCliente());
+            ps.setString(2, obj.getTipoDocumento());
+            ps.setString(3, obj.getNombreCliente());
+            ps.setString(4, obj.getApellidoCliente());
+            ps.setString(5, obj.getTelefonoCliente());
+            ps.setString(6, obj.getDireccionCliente());
+
+            result = ps.executeUpdate();
+
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }finally{ // Cerramos la conexion
-            try{
-                if(cn != null){
+        } finally { // Cerramos la conexion
+            try {
+                if (cn != null) {
                     cn.close();
                 }
-                if(ps != null){
+                if (ps != null) {
                     ps.close();
                 }
-                
-            }catch(Exception ex){
+
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-        
+
         return result;
     }
     

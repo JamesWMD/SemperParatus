@@ -18,7 +18,7 @@
     <meta name="robots" content="nosnipper, noarchive">
     <link rel="icon" href="/IMG/Icon Semper Paratus Oscuro.png">
     <link rel="stylesheet" href="CSS/panelPrincipalUsuario.css">
-    <link rel="stylesheet" href="CSS/f_ventas.css">
+    <link rel="stylesheet" href="CSS/ventas.css">
     <link rel="stylesheet" href="CSS/usuario.css">
     
     <title>Lista de Usuarios</title>

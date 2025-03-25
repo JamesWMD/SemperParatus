@@ -16,6 +16,10 @@
         <servlet-name>ClientesServlet</servlet-name>
         <servlet-class>Controladores.ClientesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VentasServlet</servlet-name>
+        <servlet-class>Controladores.VentasServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UsuariosServlet</servlet-name>
         <url-pattern>/UsuariosServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ClientesServlet</servlet-name>
         <url-pattern>/ClientesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VentasServlet</servlet-name>
+        <url-pattern>/VentasServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

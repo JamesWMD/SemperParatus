@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="CSS/f_ventas.css">
     <link rel="stylesheet" href="CSS/productos.css">
     
-    <title>Panel Pricipal</title>
+    <title>Gestion de clientes</title>
 </head>
 <body class="grid">
     <header class="header">
@@ -71,7 +71,7 @@
              <!-- Submenu del modulos Comercial -->
         <div class="main-menu__container" id="menu-container-comercial">
             <div class="main-menu__item" id="menu-item-factura-venta">
-                <a href="#" class="main-menu__link">
+                <a href="ventas.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--factura-venta">Factura de Venta</button>
                 </a>
             </div>
@@ -176,7 +176,7 @@
                     <!-- Acción Buscar -->
                     <div class="button-container">
                         <p class="form__text" for="">Buscar Cliente</p>
-                        <button type="submit" name="action" class="form__button" value="buscar">
+                        <button type="submit" name="action" class="form__button btn-buscar" value="buscar">
                             <img src="IMG/buscarUsuarios.png" alt="Buscar Clientes">
                         </button>
                     </div>
@@ -184,14 +184,14 @@
                     <!-- Acción Listar-->
                     <div class="button-container">
                         <p class="form__text" for="">Listar Clientes</p>
-                        <button type="submit" name="action" class="form__button" value="listar">
+                        <button type="submit" name="action" class="form__button btn-listar" value="listar">
                             <img src="IMG/ListarPersona.png" alt="Listar Clientes">
                         </button>
                     </div>
                     
                     <!-- Acción Limpiar -->
                     <div class="button-container">
-                        <p class="form__text" for="">Limpiar</p>
+                        <p class="form__text" for="">Limpiar Formulario</p>
                         <button type="submit" name="action" class="form__button" value="limpiar">
                             <img src="IMG/limpieza-de-datos.png" alt="Limpiar Formulario">
                         </button>
@@ -199,24 +199,24 @@
                     
                     <!-- Acción Modificar -->
                     <div class="button-container">
-                        <p class="form__text" for="">Modificar</p>
-                        <button type="submit" name="action" class="form__button" value="modificar">
+                        <p class="form__text" for="">Modificar Cliente</p>
+                        <button type="submit" name="action" class="form__button btn-modificar" value="modificar">
                             <img src="IMG/modificar_usuario.png" alt="Modificar Cliente">
                         </button>
                     </div>
                     
                     <!-- Acción Guardar -->
                     <div class="button-container">
-                        <p class="form__text" for="">Guardar</p>
-                        <button type="submit" name="action" class="form__button" value="guardar">
+                        <p class="form__text" for="">Guardar Cliente</p>
+                        <button type="submit" name="action" class="form__button btn-guardar" value="guardar">
                             <img src="IMG/crear_usuario.png" alt="Guardar Cliente">
                         </button>
                     </div>
                     
                     <!-- Acción Eliminar -->
                     <div class="button-container">
-                        <p class="form__text" for="">Eliminar</p>
-                        <button type="submit" name="action" class="form__button" value="eliminar">
+                        <p class="form__text" for="">Eliminar Cliente</p>
+                        <button type="submit" name="action" class="form__button btn-eliminar" value="eliminar">
                             <img src="IMG/eliminar_usuario.png" alt="Eliminar Cliente">
                         </button>
                     </div>

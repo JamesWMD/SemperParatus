@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="CSS/f_ventas.css">
     <link rel="stylesheet" href="CSS/productos.css">
     
-    <title>Panel Pricipal</title>
+    <title>Gestion de productos</title>
 </head>
 <body class="grid">
     <header class="header">
@@ -71,7 +71,7 @@
              <!-- Submenu del modulos Comercial -->
         <div class="main-menu__container" id="menu-container-comercial">
             <div class="main-menu__item" id="menu-item-factura-venta">
-                <a href="#" class="main-menu__link">
+                <a href="ventas.jsp" class="main-menu__link">
                     <button class="main-menu__button main-menu__button--factura-venta">Factura de Venta</button>
                 </a>
             </div>
@@ -175,7 +175,7 @@
                     <!-- Acción Buscar -->
                     <div class="button-container">
                         <p class="form__text" for="">Buscar Producto</p>
-                        <button type="summit" name="action" class="form__button" value="buscar">
+                        <button type="summit" name="action" class="form__button btn-buscar" value="buscar">
                             <img src="IMG/caja-de-entrega.png" alt="Buscar Producto">
                         </button>
                     </div>
@@ -183,31 +183,31 @@
                     <!-- Acción Listar-->
                     <div class="button-container">
                         <p class="form__text" for="">Listar Productos</p>
-                        <button type="summit" name="action" class="form__button" value="listar">
+                        <button type="summit" name="action" class="form__button btn-listar" value="listar">
                             <img src="IMG/listarProductos.png" alt="Listar Productos">
                         </button>
                     </div>
                     <div class="button-container">
-                        <p class="form__text" for="">Limpiar</p>
+                        <p class="form__text" for="">Limpiar Formulario</p>
                         <button type="summit" name="action" class="form__button" value="limpiar">
                             <img src="IMG/limpieza-de-datos.png" alt="Guardar datos">
                         </button>
                     </div>
                     <div class="button-container">
-                        <p class="form__text" for="">Modificar</p>
-                        <button type="summit" name="action" class="form__button" value="modificar">
+                        <p class="form__text" for="">Modificar Producto</p>
+                        <button type="summit" name="action" class="form__button btn-modificar" value="modificar">
                             <img src="IMG/modificarProducto.png" alt="Modificar productos">
                         </button>
                     </div>
                     <div class="button-container">
-                        <p class="form__text" for="">Guardar</p>
-                        <button type="summit" name="action" class="form__button" value="guardar">
+                        <p class="form__text" for="">Guardar Producto</p>
+                        <button type="summit" name="action" class="form__button btn-guardar" value="guardar">
                             <img src="IMG/agregar-producto.png" alt="Guardar Producto">
                         </button>
                     </div>
                     <div class="button-container">
-                        <p class="form__text" for="">Eliminar</p>
-                        <button type="summit" name="action" class="form__button" value="eliminar">
+                        <p class="form__text" for="">Eliminar Producto</p>
+                        <button type="summit" name="action" class="form__button btn-eliminar" value="eliminar">
                             <img src="IMG/eliminar-producto.png" alt="Guardar datos">
                         </button>
                     </div>
@@ -238,11 +238,11 @@
                     </div>
                     <div class="form__field--producto form__field--producto-precio">
                         <label for="precio" class="form__label">Precio</label>
-                        <input type="text" name="precio" id="precio" class="form__input--producto formatear form__input--precio" value="${producto.precio}">
+                        <input type="text" name="precio" id="precio" class="form__input--producto  form__input--precio" value="${producto.precio}">
                     </div>
                     <div class="form__field--producto form__field--producto-descuento">
                         <label for="stock" class="form__label">Stock</label>
-                        <input type="text" name="stock" id="stock" class="form__input--producto formatear  form__input--descuento" value="${producto.stock}">
+                        <input type="text" name="stock" id="stock" class="form__input--producto  form__input--stock" value="${producto.stock}">
                     </div>
                     <div class="form__field--producto form__field--producto-subtotal">
                         <label for="subtotal" class="form__label">Estado</label>

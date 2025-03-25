@@ -45,6 +45,26 @@ public class Ventas {
         this.observaciones = observaciones;
     }
 
+    public Ventas(String idCliente, Date emisionVenta, String estado, String condicionPago, String metodoEntrega, String metodoPago, String entidadPago, BigDecimal totalSubtotal, BigDecimal iva, BigDecimal reteFuente, BigDecimal reteIca, BigDecimal anticipo, BigDecimal totalVenta, BigDecimal totalDescuento, BigDecimal totalPagar, String observaciones) {
+        this.idCliente = idCliente;
+        this.emisionVenta = emisionVenta;
+        this.estado = estado;
+        this.condicionPago = condicionPago;
+        this.metodoEntrega = metodoEntrega;
+        this.metodoPago = metodoPago;
+        this.entidadPago = entidadPago;
+        this.totalSubtotal = totalSubtotal;
+        this.iva = iva;
+        this.reteFuente = reteFuente;
+        this.reteIca = reteIca;
+        this.anticipo = anticipo;
+        this.totalVenta = totalVenta;
+        this.totalDescuento = totalDescuento;
+        this.totalPagar = totalPagar;
+        this.observaciones = observaciones;
+    }
+    
+
     public int getIdVenta() {
         return idVenta;
     }
